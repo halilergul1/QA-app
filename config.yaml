@@ -1,0 +1,6 @@
+paths:
+  pdfs_dir: pdfs  # Directory where PDFs are stored
+
+elasticsearch:
+  endpoint_url: http://elasticsearch:9200  # Adjust this URL to your Elasticsearch endpoint
+  index_name: simpplr-policy-qa # The name of the Elasticsearch index to use
