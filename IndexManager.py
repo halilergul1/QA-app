@@ -20,6 +20,7 @@ from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.core import get_response_synthesizer
 from llama_index.embeddings.openai import OpenAIEmbedding
 from concurrent.futures import ThreadPoolExecutor
+from config import semantic_buffer_size, semantic_breakpoint_percentile_threshold, embedding_model, top_k_similar, cutoff
 
 class IndexManager:
     def __init__(self, pdfs_dir, elasticsearch_endpoint_url, index_name):
@@ -40,9 +41,9 @@ class IndexManager:
         return await loop.run_in_executor(None, load_data_sync)
 
     async def process_documents(self, documents):
-        embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+        embed_model = OpenAIEmbedding(model=embedding_model)
         splitter = SemanticSplitterNodeParser(
-            buffer_size=1, breakpoint_percentile_threshold=95, embed_model=embed_model
+            buffer_size=semantic_buffer_size, breakpoint_percentile_threshold=semantic_breakpoint_percentile_threshold, embed_model=embed_model
         )
         nodes = splitter.get_nodes_from_documents(documents)
         print(f"Extracted {len(nodes)} nodes from the documents with number of pages: {len(documents)}")
@@ -66,12 +67,12 @@ class IndexManager:
 
     async def create_query_engine(self):
         index = await self.get_or_create_index()
-        retriever = VectorIndexRetriever(index=index, similarity_top_k=3)
+        retriever = VectorIndexRetriever(index=index, similarity_top_k=top_k_similar)
         response_synthesizer = get_response_synthesizer()
         query_engine = RetrieverQueryEngine(
             retriever=retriever,
             response_synthesizer=response_synthesizer,
-            node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=0.70)]
+            node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=cutoff)]
         )
         return query_engine
     
@@ -93,7 +94,6 @@ class IndexManager:
                     metadata = getattr(node_data, 'metadata', {})
                     text = getattr(node_data, 'text', '')
                     text = re.sub(r'\n\n|\n|\u2028', lambda m: {'\n\n': '\u2028', '\n': ' ', '\u2028': '\n\n'}[m.group()], text)
-                    #text = getattr(node_data, 'text', '').replace('\n\n', '\u2028').replace('\n', ' ').replace('\u2028', '\n\n')
                     source_info = {
                         "file": metadata.get('file_name', 'N/A'),
                         "page": metadata.get('page_label', 'N/A'),
