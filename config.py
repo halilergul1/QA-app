@@ -1,0 +1,11 @@
+retry_limit_var = 10
+retry_count_var = 0
+wait_duration_var = 10
+embedding_model = "text-embedding-3-small"
+embedding_batch_size = 100
+top_k_similar = 3
+cutoff = 0.70
+semantic_buffer_size = 1
+semantic_breakpoint_percentile_threshold = 95
+gpt_model = "gpt-3.5-turbo"
+ideal_temperature = 0

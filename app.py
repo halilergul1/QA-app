@@ -10,6 +10,7 @@ import os
 import os
 import asyncio
 from IndexManager import IndexManager
+from config import retry_limit_var, retry_count_var, wait_duration_var
 
 # Load environment variables from .env file
 load_dotenv()
@@ -51,9 +52,9 @@ async def on_startup():
     es_client = Elasticsearch(elasticsearch_endpoint_url)
 
     # Attempt to connect to Elasticsearch with retries
-    retry_limit = 10
-    retry_count = 0
-    wait_duration = 10
+    retry_limit = retry_limit_var
+    retry_count = retry_count_var
+    wait_duration = wait_duration_var
     while retry_count < retry_limit:
         try:
             if es_client.ping():
