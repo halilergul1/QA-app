@@ -16,7 +16,7 @@ if api_key is None:
 logger = logging.getLogger(__name__)
 
 
-def load_config(config_path='config.yaml'):
+def load_config(config_path='../config.yaml'):
     """ Load configuration from a YAML file. """
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
@@ -27,16 +27,18 @@ def main():
     config = load_config()
     pdfs_dir = config['paths']['pdfs_dir']
     elasticsearch_endpoint_url = config['elasticsearch']['endpoint_url']
+    print(elasticsearch_endpoint_url)
     index_name = config['elasticsearch']['index_name']
 
     # Load or initialize the index without using a persist directory
     query_engine = load_or_initialize_index(pdfs_dir, elasticsearch_endpoint_url, index_name)
 
     # Example queries
-    query = "I will have a baby soon. What can I do to prepare for maternity leave?"
+    query = "What is the weather in Istanbul today?"
     # Perform the query
     response = query_engine.query(query)
-    print_response_and_sources(response)
+    #print_response_and_sources(response)
+    print(response.source_nodes)
 
 if __name__ == '__main__':
     main()

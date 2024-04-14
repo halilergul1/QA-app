@@ -5,13 +5,11 @@ import time
 import logging
 from dotenv import load_dotenv
 from elasticsearch import Elasticsearch
-import yaml  
-from utils import simple_format_response_and_sources
+import yaml
 import os
 import os
 import asyncio
-from utils import async_load_or_initialize_index
-
+from IndexManager import IndexManager
 
 # Load environment variables from .env file
 load_dotenv()
@@ -55,6 +53,7 @@ async def on_startup():
     # Attempt to connect to Elasticsearch with retries
     retry_limit = 10
     retry_count = 0
+    wait_duration = 10
     while retry_count < retry_limit:
         try:
             if es_client.ping():
@@ -63,23 +62,27 @@ async def on_startup():
         except Exception as e:
             retry_count += 1
             print(f"Waiting for Elasticsearch to be ready (Attempt {retry_count}/{retry_limit})...")
-            time.sleep(10)  # Wait for 10 seconds before retrying
+            time.sleep(wait_duration)  # Wait for 10 seconds before retrying
         if retry_count == retry_limit:
             raise Exception("Failed to connect to Elasticsearch after several retries.")
 
-    query_engine = await async_load_or_initialize_index(pdfs_dir, elasticsearch_endpoint_url, index_name)
+    #query_engine = await async_load_or_initialize_index(pdfs_dir, elasticsearch_endpoint_url, index_name)
+    manager = IndexManager(pdfs_dir, elasticsearch_endpoint_url, index_name)
+    query_engine = await manager.create_query_engine()
 
 @app.post("/query/")
 async def perform_query(query: Query):
     if not query_engine:
         raise HTTPException(status_code=503, detail="Index is not initialized yet")
+    if (not query.text) or query.text.strip() == "":
+        raise HTTPException(status_code=400, detail="Query text is required")
     try:
         # Directly call the query without awaiting, but check if it's awaitable
         query_response = query_engine.query(query.text)
         if asyncio.iscoroutine(query_response):
             query_response = await query_response  # Only await if it's actually a coroutine
 
-        formatted_response = simple_format_response_and_sources(query_response)
+        formatted_response = IndexManager.simple_format_response_and_sources(query_response)
         return formatted_response
     except Exception as e:
         logger.error(f"An error occurred while processing the query: {e}")

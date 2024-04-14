@@ -4,6 +4,8 @@ from llama_index.core.node_parser import SemanticSplitterNodeParser
 
 
 
+# dosya olmayabilir, boş olabilir. O senaryolaroı cover edeceksin.
+
 documents = SimpleDirectoryReader("pdfs").load_data()
 print(f"Loaded {len(documents)} document(s).")
 
