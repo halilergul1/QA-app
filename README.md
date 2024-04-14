@@ -83,7 +83,7 @@ To run the application using Docker, follow these steps:
      ```
    - This command starts all the services defined in your Docker Compose configuration.
 
-### Running Tests
+### Running Test Cases defined in e2e_test.py
 
 To execute tests, ensure that the Docker containers are up and running, and then perform the following:
 
@@ -94,7 +94,7 @@ To execute tests, ensure that the Docker containers are up and running, and then
      ```
 
 2. **Run Tests**:
-   - Execute the tests using `pytest` by running the following command in the terminal:
+   - Execute the tests using `pytest` by running the following command in the terminal while you are in the project directory and the Docker containers are running:
      ```
      pytest
      ```
