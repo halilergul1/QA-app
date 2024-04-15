@@ -68,7 +68,7 @@ This section details the steps required to set up and run the service locally fo
 
 ### Running the Application
 
-To run the application using Docker, follow these steps:
+To run the application using Docker, follow these steps and make sure you are in the project directory:
 
 1. **Set Your OPENAI_API_KEY**:
    - You have to set your OPENAI_API_KEY before running Docker as an environment variable. You can do this by running the following command in the terminal on macOS and Linux (You can use "set" instead of "export" on Windows):
