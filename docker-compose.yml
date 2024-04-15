@@ -17,7 +17,10 @@ services:
       start_period: 15s
 
   app:
-    build: .
+    build:
+      context: .
+      args:
+        OPENAI_API_KEY: ${OPENAI_API_KEY}
     ports:
       - "8000:8000"
     depends_on:
