@@ -66,17 +66,23 @@ This section details the steps required to set up and run the service locally fo
      pip install pytest
      ```
 
-### Running the Application
+### Running the Application --- export OPENAI_API_KEY='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'
 
 To run the application using Docker, follow these steps:
 
-1. **Build the Docker Application**:
+1. **Set Your OPENAI_API_KEY**:
+   - You have to set your OPENAI_API_KEY before running Docker as an environment variable. You can do this by running the following command in the terminal on macOS and Linux (You can use "set" instead of "export" on Windows):
+     ```
+     export OPENAI_API_KEY='your-api-key'
+     ```
+
+2. **Build the Docker Application**:
    - Use Docker Compose to build the application. This will read the `docker-compose.yml` file and set up the necessary Docker containers:
      ```
      docker-compose build
      ```
 
-2. **Start the Application**:
+3. **Start the Application**:
    - Once the build is complete, start the application by running:
      ```
      docker-compose up
