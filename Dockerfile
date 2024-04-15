@@ -22,9 +22,5 @@ EXPOSE 8000
 # Define environment variable
 ENV NAME World
 
-# Accept OpenAI API Key as a build-time environment variable
-ARG OPENAI_API_KEY
-ENV OPENAI_API_KEY $OPENAI_API_KEY
-
 # Run app.py when the container launches
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
