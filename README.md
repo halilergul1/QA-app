@@ -14,6 +14,9 @@ This section provides an overview of the main directories and files in this repo
 - **e2e_test.py**: contains methods for end-to-end test cases covering different possible scenarious while taking user queries etc.
 - **config.py**: contains the configuration variables for the model.
 
+### 📂 `/Documentation`
+- **Description**: Includes a single pdf file that explains the experiments and the final solution method.
+
 ### 📂 `/pdfs`
 - **Description**: Includes data files (which are shared pdf files) used in the project.
 
