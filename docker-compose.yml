@@ -17,16 +17,11 @@ services:
       start_period: 15s
 
   app:
-    build:
-      context: .
-      args:
-        OPENAI_API_KEY: ${OPENAI_API_KEY}
+    build: .
     ports:
       - "8000:8000"
     depends_on:
       elasticsearch:
         condition: service_healthy
-    env_file:
-      - .env
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
