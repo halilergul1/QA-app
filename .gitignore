@@ -3,3 +3,4 @@ venv/
 *.pyc
 *.ipynb_checkpoints/
 results/
+.env
