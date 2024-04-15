@@ -1,7 +1,7 @@
 import pytest
 import requests
-
-# This fixture can be used if you need to perform setup tasks, not needed directly here but useful in larger contexts.
+# End to end tests for the QA system
+# This fixture can be used if I need to perform setup tasks, not needed directly here but useful in larger contexts.
 @pytest.fixture
 def query_url():
     return "http://localhost:8000/query"
@@ -10,13 +10,10 @@ def query_url():
 def test_valid_question(query_url):
     # Sending the POST request to the specified URL with JSON body.
     response = requests.post(query_url, json={"text": "How many days of vacation can I have per year?"})
-    
     # Asserting that the HTTP response status code is 200.
     assert response.status_code == 200, "Expected status code 200, but got {}".format(response.status_code)
-
     # Parsing JSON response once to avoid multiple calls to response.json()
     response_data = response.json()
-
     # Asserting the structure and data types of the response
     assert "response" in response_data, "Expected 'response' key in the JSON response"
     assert isinstance(response_data["response"], str), "Expected 'response' to be a string"
@@ -27,24 +24,18 @@ def test_valid_question(query_url):
     filtered_sources = list(filter(lambda x: x["file"] == 'GPT - leave policy.pdf' and x["page"] == "1", response_data["sources"]))
     assert len(filtered_sources) != 0, "Expected GPT - leave policy.pdf in sources"
 
-
-# now test invalid as wrong input query
+# now what I test here is invalid as wrong input query
 def test_invalid_question(query_url):
     # Sending the POST request to the specified URL with JSON body.
     response = requests.post(query_url, json={"apple": "This is not a valid question."})
-    
     # Asserting that the HTTP response status code is 400.
     assert response.status_code == 422, "Expected status code 422, but got {}".format(response.status_code)
 
-
-# now test invalid as wrong input query
+# now I test invalid as wrong input query
 def test_empty_question(query_url):
     # Sending the POST request to the specified URL with JSON body.
     response = requests.post(query_url, json={"text": ""})
-    
     # Asserting that the HTTP response status code is 400.
     assert response.status_code == 400, "Expected status code 400, but got {}".format(response.status_code)
 
-
-
-# The tests can be run using a pytest command in the terminal.
+# The tests can be run using a pytest command in the terminal. Make sure the server is running before running the tests.

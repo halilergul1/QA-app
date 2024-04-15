@@ -4,7 +4,7 @@ from llama_index.core.node_parser import SemanticSplitterNodeParser
 from config import semantic_buffer_size, embedding_model
 
 try:
-    # Load documents from the specified directory
+    # Load documents
     documents = SimpleDirectoryReader("pdfs").load_data()
     print(f"Loaded {len(documents)} document(s).")
 except Exception as e:
