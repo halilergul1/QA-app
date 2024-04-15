@@ -42,7 +42,7 @@ This section details the steps required to set up and run the service locally fo
 1. **Create a Virtual Environment**: 
    - It's recommended to use a virtual environment to isolate package dependencies. To create a virtual environment, run:
      ```
-     python -m venv venv
+     python3 -m venv venv
      ```
    - Activate the virtual environment:
      - On Windows:
@@ -91,7 +91,7 @@ To run the application using Docker, follow these steps:
 
 ### Running Test Cases defined in e2e_test.py
 
-To execute tests, ensure that the Docker containers are up and running, and then perform the following:
+To execute tests, first ensure that the Docker containers are up and running. Also make sure you properly followed the steps "Local Development Setup" above to create venv and install requirement files. You can perform the following:
 
 1. **Start Docker Containers**:
    - If not already running, start your Docker containers:
