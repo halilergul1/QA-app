@@ -18,8 +18,8 @@ from config import (
 )
 
 try:
-    elasticsearch_endpoint_url = "http://localhost:9201"  # Elasticsearch endpoint URL
-    index_name = "semantic-chunk-v5"  # The name of the Elasticsearch index you want to use or create
+    elasticsearch_endpoint_url = "http://localhost:9201" 
+    index_name = "semantic-chunk-v5"  
 
     # Setup for the Elasticsearch vector store
     vector_store = ElasticsearchStore(

@@ -27,7 +27,7 @@ app = FastAPI()
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "Welcome to Policy Search Engine of Simpplr!"}
+    return {"Hello": "Welcome to Policy Search Engine developed by Simpplr!"}
 
 class Query(BaseModel):
     text: str
@@ -41,7 +41,6 @@ def load_config(config_path='config.yaml'):
 # Initialize configuration and index at startup
 config = load_config()
 pdfs_dir = config['paths']['pdfs_dir']
-#elasticsearch_endpoint_url = config['elasticsearch']['endpoint_url']
 elasticsearch_endpoint_url = os.getenv('ELASTICSEARCH_URL', config['elasticsearch']['endpoint_url'])
 index_name = config['elasticsearch']['index_name']
 query_engine = None  # This will be initialized when the server starts
@@ -78,7 +77,7 @@ async def perform_query(query: Query):
     if (not query.text) or query.text.strip() == "":
         raise HTTPException(status_code=400, detail="Query text is required")
     try:
-        # Directly call the query without awaiting, but check if it's awaitable
+        #  check if it's awaitable
         query_response = query_engine.query(query.text)
         if asyncio.iscoroutine(query_response):
             query_response = await query_response  # Only await if it's actually a coroutine

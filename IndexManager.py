@@ -78,17 +78,14 @@ class IndexManager:
     
     @staticmethod
     def simple_format_response_and_sources(response):
-            # Check if the response has an attribute 'response', and get its value
+        # Check if the response has an attribute 'response', and get its value
         primary_response = getattr(response, 'response', '')
-
         # Create the output dictionary with the primary response
         output = {"response": primary_response}
-
         # Check if the response has an attribute 'source_nodes' and process it
         sources = []
         if hasattr(response, 'source_nodes'):
             for node in response.source_nodes:
-                # Assume 'node' is an object and access its attributes directly
                 node_data = getattr(node, 'node', None)
                 if node_data:
                     metadata = getattr(node_data, 'metadata', {})
@@ -100,8 +97,6 @@ class IndexManager:
                         "text": text
                     }
                     sources.append(source_info)
-
-        # Append the sources list to the output dictionary
         output['sources'] = sources
 
         return output

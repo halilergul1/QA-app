@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from indexing import embed_model, retriever
 from config import semantic_buffer_size, semantic_breakpoint_percentile_threshold, gpt_model, cutoff, ideal_temperature
 
-load_dotenv()  # Load environment variables
+load_dotenv()  # environment variables
 
 try:
     # Load documents
@@ -60,11 +60,7 @@ if documents:
                     node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=cutoff)]
                 )
                 evaluator = RelevancyEvaluator(llm=gpt3)
-
-                # Initialize a list to hold all the evaluation data
                 eval_data = []
-
-                # Loop through all questions and evaluate
                 for question in eval_questions:
                     try:
                         response_vector = query_engine.query(question)
