@@ -66,7 +66,7 @@ This section details the steps required to set up and run the service locally fo
      pip install pytest
      ```
 
-### Running the Application --- export OPENAI_API_KEY='YOUR_OPENAI_API_KEY'
+### Running the Application
 
 To run the application using Docker, follow these steps:
 
