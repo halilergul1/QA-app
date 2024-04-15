@@ -25,3 +25,4 @@ services:
         condition: service_healthy
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - OPENAI_API_KEY=${OPENAI_API_KEY}  # Ensures the API key is passed at runtime
