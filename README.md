@@ -27,7 +27,7 @@ This section provides an overview of the main directories and files in this repo
 - **Description**: Contains index checker and loader files that implement the main pipeline with hardcoded variables.
 
 ### 📂 `/results`
-- **Description**: Includes raw results of RelevancyEvaluator of the final method/solution (semanticChunker)
+- **Description**: It only includes raw results of RelevancyEvaluator of the final method/solution (semanticChunker)
 
 ### 📄 `README.md`
 - **Description**: Provides an overview of the project, installation instructions, and usage examples.
