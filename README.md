@@ -90,7 +90,7 @@ To run the application using Docker, follow these steps and make sure you are in
      ```
      docker-compose up
      ```
-   - This command starts all the services defined in your Docker Compose configuration.
+   - This command starts all the services defined in your Docker Compose configuration. The application will be running on `http://localhost:8000` and you can send queries to the API to try on `http://localhost:8000/docs#/default/perform_query_query__post`.
 
 ### Running Test Cases defined in e2e_test.py
 
@@ -107,5 +107,4 @@ To execute tests, first ensure that the Docker containers are up and running. Al
      ```
      pytest
      ```
-
 These steps will help you set up the development environment, run the application, and execute tests efficiently. Adjust the commands according to your specific configurations if necessary.
