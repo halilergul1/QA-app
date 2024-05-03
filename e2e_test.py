@@ -3,7 +3,7 @@ import requests
 # End to end tests for the QA system
 # This fixture can be used if I need to perform setup tasks, not needed directly here but useful in larger contexts.
 @pytest.fixture
-def query_url():
+def query_url(): # this is a fixture that returns the URL of the query endpoint.
     return "http://localhost:8000/query"
 
 # Using the fixture to provide the URL, making it easy to modify in one place if needed.

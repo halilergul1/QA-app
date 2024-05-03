@@ -36,7 +36,12 @@ class IndexManager:
     async def load_data(self):
         def load_data_sync():
             return SimpleDirectoryReader(self.pdfs_dir).load_data()
-
+        # Execute Synchronously in Asynchronous Context: loop.run_in_executor(None, load_data_sync) schedules the synchronous function 
+        # load_data_sync to be executed in the default executor (which is typically a thread pool). 
+        # This method returns a Future object, and await is used to wait for the Future object to complete. 
+        # why we use? To run synchronous functions asynchronously
+        # Synchronous functions are those that execute sequentially, meaning the program waits for the function to complete before moving on to the next line of code. 
+        # Asynchronous functions, on the other hand, allow the program to continue executing other code while waiting for the function to complete.
         loop = asyncio.get_running_loop()
         return await loop.run_in_executor(None, load_data_sync)
 
