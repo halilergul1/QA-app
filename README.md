@@ -1,5 +1,5 @@
 # QA-app
-This is my personal project. Given pdf folder consisting of various pdf files, this app deploys elastich search along with LLamaindex and can be used as Question Answering to your documents. I would like to hear your comments and feedbacks!
+This is my personal project. Given a pdf folder consisting of various pdf files, this app deploys elastich search along with LLamaindex and can be used as Question Answering to your documents. I would like to hear your comments and feedbacks!
 
 ## Directory Structure
 
