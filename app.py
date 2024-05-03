@@ -25,13 +25,17 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 
+# This defines an endpoint at the root URL ("/"). When this URL is accessed via a GET request, the function returns a JSON response.
 @app.get("/")
 async def read_root():
     return {"Hello": "Welcome to Policy Search Engine developed by Simpplr!"}
 
+#This is a Pydantic model which is used to validate the data received from the client. 
+#Here, the Query class expects to receive a JSON object with a key text
 class Query(BaseModel):
     text: str
 
+#This function loads a YAML configuration file into a Python dictionary.
 def load_config(config_path='config.yaml'):
     """ Load configuration from a YAML file. """
     with open(config_path, 'r') as file:
@@ -46,8 +50,10 @@ index_name = config['elasticsearch']['index_name']
 query_engine = None  # This will be initialized when the server starts
 
 
+# This asynchronous function is intended to be called when the FastAPI application starts. 
+# It checks if Elasticsearch is ready and sets up the query_engine once Elasticsearch is available.
 async def on_startup():
-    global query_engine
+    global query_engine # why do we need to use global here? Because we are modifying the global variable query_engine inside the function.
     es_client = Elasticsearch(elasticsearch_endpoint_url)
 
     # Attempt to connect to Elasticsearch with retries
@@ -66,10 +72,15 @@ async def on_startup():
         if retry_count == retry_limit:
             raise Exception("Failed to connect to Elasticsearch after several retries.")
 
-    #query_engine = await async_load_or_initialize_index(pdfs_dir, elasticsearch_endpoint_url, index_name)
     manager = IndexManager(pdfs_dir, elasticsearch_endpoint_url, index_name)
+    # The await keyword below is used to pause the execution of the containing asynchronous function (on_startup() in this case) until the awaited task (create_query_engine()) is completed. 
+    # The use of await here indicates that the create_query_engine() method returns a coroutine, an object that encapsulates the execution of the asynchronous operation, which needs to be resolved (or completed) to continue. 
+    # This ensures that the query engine is fully initialized and ready to use before any queries are processed.
+    # This line is crucial for ensuring that the query engine is ready and operational before the API starts serving queries. 
+    # By awaiting the creation of the query engine, you ensure that all necessary setup tasks (like connecting to Elasticsearch, configuring the index, loading necessary data or schemas, etc.) are complete. 
     query_engine = await manager.create_query_engine()
-
+# This endpoint handles POST requests where a user sends a query in JSON format. The function checks if the query is properly formed, 
+# sends it to Elasticsearch (via query_engine), and formats the response before sending it back to the user.
 @app.post("/query/")
 async def perform_query(query: Query):
     if not query_engine:
@@ -79,7 +90,7 @@ async def perform_query(query: Query):
     try:
         #  check if it's awaitable
         query_response = query_engine.query(query.text)
-        if asyncio.iscoroutine(query_response):
+        if asyncio.iscoroutine(query_response): 
             query_response = await query_response  # Only await if it's actually a coroutine
 
         formatted_response = IndexManager.simple_format_response_and_sources(query_response)
