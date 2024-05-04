@@ -28,7 +28,7 @@ app = FastAPI()
 # This defines an endpoint at the root URL ("/"). When this URL is accessed via a GET request, the function returns a JSON response.
 @app.get("/")
 async def read_root():
-    return {"Hello": "Welcome to Policy Search Engine developed by Simpplr!"}
+    return {"Hello": "Welcome to Policy Search Engine developed by halilergul1 @ github!"}
 
 #This is a Pydantic model which is used to validate the data received from the client. 
 #Here, the Query class expects to receive a JSON object with a key text
