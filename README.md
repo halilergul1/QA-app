@@ -1,6 +1,8 @@
 # QA-app
 This is my personal project. Given a pdf folder consisting of various pdf files, this app deploys elastich search along with LLamaindex and can be used as Question Answering to your documents. Together with FastAPI, one can give query and get response and sources as output. Also can be used by companies as their QA app for their long policy documents to automate customer queiries regarding parental leave and so forth. I would like to hear your comments and feedbacks!
 
+**For custom use, you can add your own documents to `/pdfs` folder**
+
 ## Directory Structure
 
 This section provides an overview of the main directories and files in this repository, explaining how they contribute to the project.
