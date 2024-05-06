@@ -14,7 +14,30 @@ Given a pdf folder consisting of various pdf files, this app deploys elastich se
 
 This section details the steps required to set up and run the service locally for development, testing, and deployment using Docker. Follow these instructions to get your environment ready.
 
-### Local Development Setup
+### Running the Application
+
+To run the application using Docker, follow these steps and make sure you are in the project directory:
+
+1. **Set Your OPENAI_API_KEY**:
+   - You have to set your OPENAI_API_KEY before running Docker as an environment variable. You can do this by running the following command in the terminal on macOS and Linux (You can use "set" instead of "export" on Windows):
+     ```
+     export OPENAI_API_KEY='your-api-key'
+     ```
+
+2. **Build the Docker Application**:
+   - Use Docker Compose to build the application. This will read the `docker-compose.yml` file and set up the necessary Docker containers:
+     ```
+     docker-compose build
+     ```
+
+3. **Start the Application**:
+   - Once the build is complete, start the application by running:
+     ```
+     docker-compose up
+     ```
+   - This command starts all the services defined in your Docker Compose configuration. The application will be running on `http://localhost:8000` and you can send queries to the API to try on `http://localhost:8000/docs#/default/perform_query_query__post`.
+
+### Local Development Setup (optional, for DEVs)
 
 1. **Create a Virtual Environment**: 
    - It's recommended to use a virtual environment to isolate package dependencies. To create a virtual environment, run:
@@ -43,30 +66,8 @@ This section details the steps required to set up and run the service locally fo
      pip install pytest
      ```
 
-### Running the Application
 
-To run the application using Docker, follow these steps and make sure you are in the project directory:
-
-1. **Set Your OPENAI_API_KEY**:
-   - You have to set your OPENAI_API_KEY before running Docker as an environment variable. You can do this by running the following command in the terminal on macOS and Linux (You can use "set" instead of "export" on Windows):
-     ```
-     export OPENAI_API_KEY='your-api-key'
-     ```
-
-2. **Build the Docker Application**:
-   - Use Docker Compose to build the application. This will read the `docker-compose.yml` file and set up the necessary Docker containers:
-     ```
-     docker-compose build
-     ```
-
-3. **Start the Application**:
-   - Once the build is complete, start the application by running:
-     ```
-     docker-compose up
-     ```
-   - This command starts all the services defined in your Docker Compose configuration. The application will be running on `http://localhost:8000` and you can send queries to the API to try on `http://localhost:8000/docs#/default/perform_query_query__post`.
-
-### Running Test Cases defined in e2e_test.py
+### Running Test Cases defined in e2e_test.py (optional, for DEVs)
 
 To execute tests, first ensure that the Docker containers are up and running. Also make sure you properly followed the steps "Local Development Setup" above to create venv and install requirement files. You can perform the following:
 
