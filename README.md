@@ -1,5 +1,5 @@
 # Illustration
-![Alt text]([/path/to/image.png](https://github.com/halilergul1/QA-app/blob/main/QA-app.png))
+![Alt text](QA-app.png)
 
 
 
