@@ -5,3 +5,5 @@ venv/
 .env
 # ignore the directory simpplrllama.egg-info
 simpplrllama.egg-info/
+# ignore the directory .vscode
+.vscode/
