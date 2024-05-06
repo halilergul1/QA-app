@@ -1,5 +1,5 @@
 # Illustration
-![alt text]([http://url/to/img.png](https://github.com/halilergul1/QA-app/blob/main/QA-app.png))
+![Hello this is graph]([http://url/to/img.png](https://github.com/halilergul1/QA-app/blob/main/QA-app.png))
 
 
 
