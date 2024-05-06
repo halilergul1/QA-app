@@ -77,7 +77,7 @@ To execute tests, first ensure that the Docker containers are up and running. Al
 These steps will help you set up the development environment, run the application, and execute tests efficiently. Adjust the commands according to your specific configurations if necessary.
 
 
-## Directory Structure
+## Directory Structure (optional)
 
 This section provides an overview of the main directories and files in this repository, explaining how they contribute to the project.
 

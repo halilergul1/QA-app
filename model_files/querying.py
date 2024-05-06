@@ -1,6 +1,6 @@
 import os
 from IndexManager import IndexManager
-from indexing import query_engine  # query_engine is the output of indexing.py
+from model_files.indexing import query_engine  # query_engine is the output of indexing.py
 
 try:
     # Execute the query using the query engine

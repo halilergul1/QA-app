@@ -9,7 +9,7 @@ from llama_index.vector_stores.elasticsearch import ElasticsearchStore
 from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.core import get_response_synthesizer
 from llama_index.embeddings.openai import OpenAIEmbedding
-from ingest import nodes  # nodes is the output of ingest.py
+from model_files.ingest import nodes  # nodes is the output of ingest.py
 from config import (
     embedding_model,
     embedding_batch_size,

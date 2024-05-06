@@ -9,7 +9,7 @@ from llama_index.core.node_parser import SemanticSplitterNodeParser
 from llama_index.core.evaluation import DatasetGenerator, RelevancyEvaluator
 from llama_index.core import get_response_synthesizer
 from dotenv import load_dotenv
-from indexing import embed_model, retriever
+from model_files.indexing import embed_model, retriever
 from config import semantic_buffer_size, semantic_breakpoint_percentile_threshold, gpt_model, cutoff, ideal_temperature
 
 load_dotenv()  # environment variables
