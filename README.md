@@ -1,45 +1,9 @@
 # QA-app
-This is my personal project. Given a pdf folder consisting of various pdf files, this app deploys elastich search along with LLamaindex and can be used as Question Answering to your documents. Together with FastAPI, one can give query and get response and sources as output. Also can be used by companies as their QA app for their long policy documents to automate customer queiries regarding parental leave and so forth. I would like to hear your comments and feedbacks!
+Given a pdf folder consisting of various pdf files, this app deploys elastich search along with LLamaindex and can be used as Question Answering to your documents. Together with FastAPI, one can give query and get response and sources as output. Also can be used by companies as their QA app for their long policy documents to automate customer queiries regarding parental leave and so forth. I would like to hear your comments and feedbacks!
 
 **For custom use, you can add your own documents to `/pdfs` folder**
 
-## Directory Structure
-
-This section provides an overview of the main directories and files in this repository, explaining how they contribute to the project.
-
-### 📂  `Base Directory`
-- **app.py**: The entry point of the program. Contains the main functionalities executed when the project is run via FAST api.
-- **IndexManager.py**: Contains the IndexManager class with attributes and methods handling index loading, index initialization, creation, query engine creation and formatting output
-- **ingest.py**: Implements the data ingestion part from pdfs into llamaindex nodes
-- **index.py**: Takes the generated nodes and setup a Elasticsearch vector store and assemble a query engine of llamaindex.
-- **querying.py**: Takes a query and generates a response.
-- **evaluate.py**: Generates synthetic data out of document nodes for model evaluation via RelevancyEvaluator.
-- **e2e_test.py**: contains methods for end-to-end test cases covering different possible scenarious while taking user queries etc.
-- **config.py**: contains the configuration variables for the model.
-
-### 📂 `/Documentation`
-- **Description**: Includes a single pdf file that explains the experiments and the final solution method.
-
-### 📂 `/pdfs`
-- **Description**: Includes data files (which are shared pdf files) used in the project.
-
-### 📂 `/experiments`
-- **Description**: Includes py notebooks that come with 2-3 different solutions for the QA task. The file semanticChunker.ipynb is the final solution method. The details were explained in experiments.pdf
-
-### 📂 `/manual-test`
-- **Description**: Contains index checker and loader files that implement the main pipeline with hardcoded variables.
-
-### 📂 `/results`
-- **Description**: It only includes raw results of RelevancyEvaluator of the final method/solution (semanticChunker)
-
-### 📄 `README.md`
-- **Description**: Provides an overview of the project, installation instructions, and usage examples.
-
-### 📄 `.gitignore`
-- **Description**: Specifies intentionally untracked files to ignore.
-
-
-## How to Setup the Service
+## How to Setup and Use the Service Easily
 
 This section details the steps required to set up and run the service locally for development, testing, and deployment using Docker. Follow these instructions to get your environment ready.
 
@@ -111,3 +75,39 @@ To execute tests, first ensure that the Docker containers are up and running. Al
      pytest
      ```
 These steps will help you set up the development environment, run the application, and execute tests efficiently. Adjust the commands according to your specific configurations if necessary.
+
+
+## Directory Structure
+
+This section provides an overview of the main directories and files in this repository, explaining how they contribute to the project.
+
+### 📂  `Base Directory`
+- **app.py**: The entry point of the program. Contains the main functionalities executed when the project is run via FAST api.
+- **IndexManager.py**: Contains the IndexManager class with attributes and methods handling index loading, index initialization, creation, query engine creation and formatting output
+- **ingest.py**: Implements the data ingestion part from pdfs into llamaindex nodes
+- **index.py**: Takes the generated nodes and setup a Elasticsearch vector store and assemble a query engine of llamaindex.
+- **querying.py**: Takes a query and generates a response.
+- **evaluate.py**: Generates synthetic data out of document nodes for model evaluation via RelevancyEvaluator.
+- **e2e_test.py**: contains methods for end-to-end test cases covering different possible scenarious while taking user queries etc.
+- **config.py**: contains the configuration variables for the model.
+
+### 📂 `/Documentation`
+- **Description**: Includes a single pdf file that explains the experiments and the final solution method.
+
+### 📂 `/pdfs`
+- **Description**: Includes data files (which are shared pdf files) used in the project.
+
+### 📂 `/experiments`
+- **Description**: Includes py notebooks that come with 2-3 different solutions for the QA task. The file semanticChunker.ipynb is the final solution method. The details were explained in experiments.pdf
+
+### 📂 `/manual-test`
+- **Description**: Contains index checker and loader files that implement the main pipeline with hardcoded variables.
+
+### 📂 `/results`
+- **Description**: It only includes raw results of RelevancyEvaluator of the final method/solution (semanticChunker)
+
+### 📄 `README.md`
+- **Description**: Provides an overview of the project, installation instructions, and usage examples.
+
+### 📄 `.gitignore`
+- **Description**: Specifies intentionally untracked files to ignore.

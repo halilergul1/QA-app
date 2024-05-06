@@ -3,3 +3,5 @@ venv/
 *.pyc
 *.ipynb_checkpoints/
 .env
+# ignore the directory simpplrllama.egg-info
+simpplrllama.egg-info/
